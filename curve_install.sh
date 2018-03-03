@@ -8,6 +8,7 @@ COIN_CLI='/usr/local/bin/curve-cli'
 COIN_REPO='https://github.com/curvecoin/curve/releases/download/2.0.1/curvecoin-wallet-ubuntu16.04.zip'
 COIN_NAME='Curve'
 SENTINEL_REPO='https://github.com/curvecoin/CurveSentinel.git'
+SENTINEL_LOG='curve_sentinel.log'
 COIN_PORT=9191
 RPCPORT=8988
 
@@ -27,7 +28,7 @@ function install_sentinel() {
   cd $CONFIGFOLDER/sentinel
   virtualenv ./venv >/dev/null 2>&1  
   ./venv/bin/pip install -r requirements.txt >/dev/null 2>&1
-  echo  "* * * * * cd $CONFIGFOLDER/sentinel && ./venv/bin/python bin/sentinel.py >> ~/sentinel.log 2>&1" > $CONFIGFOLDER/$COIN_NAME.cron
+  echo  "* * * * * cd $CONFIGFOLDER/sentinel && ./venv/bin/python bin/sentinel.py >> ~/$SENTINEL_LOG 2>&1" > $CONFIGFOLDER/$COIN_NAME.cron
   crontab $CONFIGFOLDER/$COIN_NAME.cron
   rm $CONFIGFOLDER/$COIN_NAME.cron >/dev/null 2>&1
 }
